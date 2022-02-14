@@ -31,7 +31,7 @@ from bigfastapi.wallet import app as wallet
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
-
+from db.database import create_database
 
 app = FastAPI()
 
