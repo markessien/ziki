@@ -31,6 +31,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from db.database import create_database
+from api.ziki import app as ziki
+
 
 app = FastAPI()
 
@@ -46,20 +48,19 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+
+# These are all included from BigFastAPI and are the default things
+# that are supported
 app.include_router(authentication, tags=["Auth"])
 app.include_router(accounts_router, tags=["User"])
-app.include_router(organization_router, tags=["Organization"])
-app.include_router(countries, tags=["Countries"])
 app.include_router(faq)
 app.include_router(contact)
 app.include_router(blog, tags=["Blog"])
 app.include_router(pages, tags=["Pages"])
-app.include_router(plans, tags=['Plans'])
 app.include_router(email)
 app.include_router(files, tags=["File"])
 app.include_router(accounts, tags=["Auth"])
 app.include_router(comments, tags=["Comments"])
-app.include_router(banks, tags=["Banks"], prefix="/stores/{store_id}")
 app.include_router(countries, tags=["Countries"])
 app.include_router(organization, tags=["Organization"])
 app.include_router(qrcode, tags=["qrcode"])
@@ -67,12 +68,13 @@ app.include_router(settings, tags=["Settings"])
 app.include_router(wallet, tags=["Wallet"])
 app.include_router(notification, tags=["Notification"])
 app.include_router(credit)
-app.include_router(pdfs)
 app.include_router(jwt_services)
-app.include_router(receipts)
-app.include_router(customer)
-app.include_router(customer, tags=['Customers'], prefix="/stores/{store_id}")
-app.include_router(sms)
+
+
+# These are your own APIs that you import from your folder. In this case
+# the files are in the api folder.
+app.include_router(ziki,  tags=["Ziki"])
+
 
 
 @app.get("/", tags=["Home"])
