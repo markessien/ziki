@@ -11,6 +11,7 @@ from bigfastapi.countries import app as countries
 from bigfastapi.credit import app as credit
 from bigfastapi.customer import app as customer
 from bigfastapi.email import app as email
+
 # Import all the functionality that BFA provides
 from bigfastapi.faq import app as faq
 from bigfastapi.files import app as files
