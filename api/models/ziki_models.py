@@ -11,6 +11,6 @@ class Post(_database.Base):
 
 
 class Feed(_database.Base):
-    __tablename__ = "posts"
+    __tablename__ = "feed"
     id = Column(String(255), primary_key=True, index=True, default=uuid4().hex)
     text = Column(String(255), index=True)

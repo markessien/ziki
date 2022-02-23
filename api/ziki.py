@@ -1,16 +1,19 @@
 import fastapi, os
-from fastapi import FastAPI
+import sqlalchemy.orm as orm
+from .schemas import ziki_schemas as schemas
+from .models import ziki_models as models
+
+from fastapi import FastAPI, status, APIRouter, Depends
+from api.database.db import get_db
 
 app = APIRouter()
 
-
+# Get people you are following
 @app.get("/api/get_following")
-def get_following(name: str, organization_id: str, db: orm.Session = fastapi.Depends(get_db)):
-    return "The people xou are following"
+def get_following(username: str, db: orm.Session = fastapi.Depends(get_db)):
+    return "The people you are following"
 
-
-
-#create debt
-@app.post("/api/create", response_model= debtSchema.DebtBaseOutput)
-def create_newfollow(body: debtSchema.DebtBase, db: orm.Session = fastapi.Depends(get_db)):
-    return "This creates a debt"
+# create a new follow using a post request
+@app.post("/api/create")
+def create_newfollow(body: schemas.Feed, db: orm.Session = fastapi.Depends(get_db)):
+    return "This allows you follow"
